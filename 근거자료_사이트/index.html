@@ -1,0 +1,377 @@
+<title>대구 미식관광 근거자료집</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500;800;900&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: 한 줄 논지 → 핵심 근거 카드 → 원문 화면 증거 → 출처별 근거표 → 반대 근거 → 원문 파일 목록. 출처 등급(A/B/C)을 모든 수치 옆에 붙인다. */
+:root{
+  --bg:#f6f5f3; --surface:#ffffff; --ink:#1d1b1a; --muted:#6b6560; --line:#e2ddd8;
+  --accent:#b3321f; --accent-soft:#f7e3de; --bar2:#d8d2cc;
+  --tierA:#1f6b4a; --tierA-bg:#e1f0e8; --tierB:#2d5a8c; --tierB-bg:#e2ebf5; --tierC:#8a5a12; --tierC-bg:#f6ecd9;
+  --warn-bg:#fbf1e6;
+  --f-display:"Gothic A1","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#171514; --surface:#211e1c; --ink:#efeae5; --muted:#a59d96; --line:#36312d;
+  --accent:#ef6a52; --accent-soft:#3a221d; --bar2:#4a443f;
+  --tierA:#7fd1a8; --tierA-bg:#1d3329; --tierB:#8fb8e6; --tierB-bg:#1c2836; --tierC:#e4b866; --tierC-bg:#352a17;
+  --warn-bg:#2c2219; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#171514; --surface:#211e1c; --ink:#efeae5; --muted:#a59d96; --line:#36312d;
+  --accent:#ef6a52; --accent-soft:#3a221d; --bar2:#4a443f;
+  --tierA:#7fd1a8; --tierA-bg:#1d3329; --tierB:#8fb8e6; --tierB-bg:#1c2836; --tierC:#e4b866; --tierC-bg:#352a17;
+  --warn-bg:#2c2219; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1040px;margin:0 auto;padding-block:40px 80px;display:flex;flex-direction:column;gap:56px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.25}
+h1{font-size:clamp(30px,5vw,46px);font-weight:900;letter-spacing:-.02em}
+h2{font-size:clamp(22px,3vw,28px);font-weight:800}
+h3{font-size:18px;font-weight:800}
+p{margin:0}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.mono{font-family:var(--f-mono);font-size:13px}
+.muted{color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+
+/* header */
+header{display:flex;flex-direction:column;gap:16px;border-bottom:3px solid var(--ink);padding-bottom:28px}
+.thesis{font-size:clamp(17px,2.2vw,20px);max-width:62ch}
+.thesis b{color:var(--accent)}
+.meta{display:flex;flex-wrap:wrap;gap:8px 20px}
+.legend{display:flex;flex-wrap:wrap;gap:8px}
+
+/* tier chips */
+.tier{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:12px;font-weight:500;padding:2px 8px;border-radius:4px;white-space:nowrap}
+.tier.A{color:var(--tierA);background:var(--tierA-bg)}
+.tier.B{color:var(--tierB);background:var(--tierB-bg)}
+.tier.C{color:var(--tierC);background:var(--tierC-bg)}
+
+section{display:flex;flex-direction:column;gap:20px}
+.sec-head{display:flex;flex-direction:column;gap:6px}
+
+/* claim list */
+.claims{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.claim{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.claim .big{font-family:var(--f-display);font-weight:900;font-size:44px;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.claim .big small{font-size:20px;font-weight:800}
+.claim .what{font-weight:600}
+.cite{border-top:1px dashed var(--line);padding-top:10px;display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)}
+.cite .file{font-family:var(--f-mono);font-size:12.5px;color:var(--ink);word-break:keep-all;overflow-wrap:anywhere}
+
+/* evidence screenshots */
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+figure img{display:block;width:100%;height:auto;background:#fff;border-bottom:1px solid var(--line)}
+figcaption{padding:16px;display:flex;flex-direction:column;gap:8px;font-size:14px}
+figcaption ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:2px}
+mark{background:var(--accent-soft);color:var(--ink);padding:0 3px;border-radius:2px}
+
+/* bar charts */
+.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.bars{display:flex;flex-direction:column;gap:12px}
+.row{display:grid;grid-template-columns:118px 1fr;gap:10px;align-items:center}
+.row .lbl{font-size:14px;line-height:1.3}
+.row.hl .lbl{font-weight:700;color:var(--accent)}
+.track{display:flex;flex-direction:column;gap:3px}
+.bar{height:14px;border-radius:2px;background:var(--ink);position:relative;min-width:2px;flex-shrink:0;max-width:calc(100% - 44px)}
+.row.hl .bar.cur{background:var(--accent)}
+.bar.prev{background:var(--bar2);height:8px}
+.val{font-family:var(--f-mono);font-size:12px;font-variant-numeric:tabular-nums}
+.bar-line{display:flex;align-items:center;gap:8px}
+.key{display:flex;gap:16px;font-size:12px;color:var(--muted)}
+.key i{display:inline-block;width:12px;height:8px;border-radius:2px;margin-right:5px;vertical-align:middle}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:14px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-mono);font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--muted);background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td.n{font-family:var(--f-display);font-weight:800;font-size:18px;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* warning */
+.warn{background:var(--warn-bg);border:1px solid var(--line);border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:12px}
+.warn ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+
+.cite-box{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.cite-box code{font-family:var(--f-mono);font-size:13.5px;overflow-wrap:anywhere}
+button{font:inherit;font-size:13px;padding:6px 12px;border-radius:4px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer}
+footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:var(--muted)}
+@media (max-width:480px){ .row{grid-template-columns:96px 1fr} .claim .big{font-size:38px} }
+</style>
+
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">팀 공유용 · 대구 10미 미식관광 근거자료 · 2026.10.28 정리</span>
+  <h1>대구 미식관광 근거자료집</h1>
+  <p class="thesis">2025년 대구시 공식 조사에서 내국인 관광객이 꼽은 <b>가장 좋았던 활동 1위는 '맛집 체험'(34.2%)</b>이었습니다. 외국인 관광객은 <b>'식당 및 음식'에 가장 높은 만족도(93.0%)</b>를 줬습니다. 이 페이지에는 그 근거가 되는 원문 파일 이름, 쪽수, 원문 화면을 함께 모았습니다.</p>
+  <div class="meta">
+    <div class="legend">
+      <span class="tier A">A 원문 직접 확인</span>
+      <span class="tier B">B 정부 발표의 언론 보도</span>
+      <span class="tier C">C 과거 조사·연구의 언론 보도</span>
+    </div>
+  </div>
+  <p class="muted" style="font-size:14px">A등급은 대구시가 공개한 보고서 PDF를 직접 열어 해당 쪽에서 숫자를 확인한 것입니다. B·C등급은 발표나 보고서의 존재와 수치를 언론 기사로 확인했습니다. 발표 자료에는 가능하면 A등급 숫자를 앞세우세요.</p>
+</header>
+
+<!-- 핵심 근거 -->
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">핵심 근거 6</span>
+    <h2>한 문장씩 인용할 수 있는 숫자</h2>
+  </div>
+  <div class="claims">
+    <article class="claim">
+      <span class="tier A">A 원문 직접 확인</span>
+      <div class="big num">34.2<small>%</small></div>
+      <p class="what">대구 여행에서 가장 좋았던 활동 1위: 맛집 체험(지역 음식 외)</p>
+      <p class="muted" style="font-size:14px">2023년 28.3%에서 5.9%p 올라 1위가 되었습니다. 2위 공원·수목원·휴양림은 33.9%입니다.</p>
+      <div class="cite"><span class="file">2025년 대구관광 실태조사 보고서(내국인).pdf</span><span>대구광역시 · 「주요결과」 PDF 6쪽 · 내국인 2,000명(대구시민 제외)</span><span>참고 사이트: <a href="https://ebook.daegu.go.kr/Viewer/ELPQP87DF7C2" target="_blank" rel="noopener">대구시 전자책 원문</a></span></div>
+    </article>
+    <article class="claim">
+      <span class="tier A">A 원문 직접 확인</span>
+      <div class="big num">30.4<small>%</small></div>
+      <p class="what">다른 도시와 비교한 대구의 강점에 '먹거리'를 꼽음</p>
+      <p class="muted" style="font-size:14px">'다양한 먹거리' 19.1%(2위)와 '특색있는 미식' 11.3%(4위)를 더한 값입니다. 1위는 자연 관광지 21.5%입니다.</p>
+      <div class="cite"><span class="file">2025년 대구관광 실태조사 보고서(내국인).pdf</span><span>대구광역시 · 「주요결과」 PDF 6쪽</span><span>참고 사이트: <a href="https://ebook.daegu.go.kr/Viewer/ELPQP87DF7C2" target="_blank" rel="noopener">대구시 전자책 원문</a></span></div>
+    </article>
+    <article class="claim">
+      <span class="tier A">A 원문 직접 확인</span>
+      <div class="big num">93.0<small>%</small></div>
+      <p class="what">외국인 관광객 항목별 만족도 1위: 식당 및 음식</p>
+      <p class="muted" style="font-size:14px">2019년 84.8%에서 올랐습니다. 대구시민 친절성(92.6%), 쇼핑(91.0%)보다 높습니다.</p>
+      <div class="cite"><span class="file">2024년 대구관광 실태조사 보고서(외국인).pdf</span><span>대구광역시 · 「주요결과」 PDF 5쪽</span><span>참고 사이트: <a href="https://ebook.daegu.go.kr/Viewer/H1354K45C7OQ" target="_blank" rel="noopener">대구시 전자책 원문</a></span></div>
+    </article>
+    <article class="claim">
+      <span class="tier A">A 원문 직접 확인</span>
+      <div class="big num">38.8<small>%</small></div>
+      <p class="what">외국인 추천 관광지 1위: 서문시장(야시장)</p>
+      <p class="muted" style="font-size:14px">2019년 23.1%에서 올랐습니다. 내국인 방문 관광지에서도 서문시장이 29.4%로 2위입니다(2025).</p>
+      <div class="cite"><span class="file">2024년 대구관광 실태조사 보고서(외국인).pdf</span><span>대구광역시 · PDF 5쪽 / 2025 내국인편 PDF 6쪽</span><span>참고 사이트: <a href="https://ebook.daegu.go.kr/Viewer/H1354K45C7OQ" target="_blank" rel="noopener">2024 외국인편 원문</a> · <a href="https://ebook.daegu.go.kr/Viewer/ELPQP87DF7C2" target="_blank" rel="noopener">2025 내국인편 원문</a></span></div>
+    </article>
+    <article class="claim">
+      <span class="tier B">B 정부 발표의 언론 보도</span>
+      <div class="big num">61.7<small>%</small></div>
+      <p class="what">방한 외국인이 여행을 정할 때 고려한 활동 1위: 식도락</p>
+      <p class="muted" style="font-size:14px">실제 식도락 참여율은 81.6%(1위)이고, 지출 중 음식 관련 비중은 45.9%입니다.</p>
+      <div class="cite"><span class="file">2025년 외래관광객조사 최종 보고서 (2026.05.26 게시)</span><span>문화체육관광부·한국관광공사</span><span>참고 사이트: <a href="https://m.ddaily.co.kr/page/view/2026100114150500860" target="_blank" rel="noopener">디지털데일리 2026.10.01</a> · <a href="https://know.tour.go.kr/stat/fReportsOfForeignerDis19Re.do" target="_blank" rel="noopener">관광지식정보시스템 보고서 목록</a></span></div>
+    </article>
+    <article class="claim">
+      <span class="tier B">B 정부 발표의 언론 보도</span>
+      <div class="big num">115<small>만 명</small></div>
+      <p class="what">2025 대구치맥페스티벌 방문객</p>
+      <p class="muted" style="font-size:14px">카드 매출은 평소보다 17.9% 늘었습니다. 통신사·카드사·SNS 빅데이터로 집계했습니다.</p>
+      <div class="cite"><span class="file">대구시 빅데이터 분석 발표 (2025.11)</span><span>참고 사이트: <a href="https://www.ajunews.com/view/20251105145720704" target="_blank" rel="noopener">아주경제 2025.11.05</a></span></div>
+    </article>
+  </div>
+</section>
+
+<!-- 차트 -->
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">2025 대구관광 실태조사(내국인) · PDF 6쪽 · 단위 % · 참고 사이트: <a href="https://ebook.daegu.go.kr/Viewer/ELPQP87DF7C2" target="_blank" rel="noopener">대구시 전자책</a></span>
+    <h2>먹거리는 대구의 강점이면서 아쉬운 점입니다</h2>
+    <p class="muted" style="max-width:65ch">같은 조사에서 '특색있는 미식'(13.7%)과 '다양한 먹거리'(11.3%)는 다른 도시보다 아쉬운 점 1, 2위로도 꼽혔습니다. 관광객이 대구에서 음식을 기대하는데, 대구를 대표하는 음식이 아직 잘 드러나지 않는다는 뜻입니다. 대구 10미를 내세울 근거가 됩니다.</p>
+  </div>
+  <div class="charts">
+    <div class="chart">
+      <h3>가장 좋았던 활동</h3>
+      <div class="key"><span><i style="background:var(--accent)"></i>2025</span><span><i style="background:var(--bar2)"></i>2023</span></div>
+      <div class="bars">
+        <div class="row hl"><span class="lbl">맛집 체험</span><div class="track"><div class="bar-line"><div class="bar cur" style="width:calc(34.2% * 2.2)"></div><span class="val">34.2</span></div><div class="bar-line"><div class="bar prev" style="width:calc(28.3% * 2.2)"></div><span class="val muted">28.3</span></div></div></div>
+        <div class="row"><span class="lbl">공원/수목원/휴양림</span><div class="track"><div class="bar-line"><div class="bar cur" style="width:calc(33.9% * 2.2)"></div><span class="val">33.9</span></div><div class="bar-line"><div class="bar prev" style="width:calc(36.4% * 2.2)"></div><span class="val muted">36.4</span></div></div></div>
+        <div class="row"><span class="lbl">거리(로드)샵</span><div class="track"><div class="bar-line"><div class="bar cur" style="width:calc(32.1% * 2.2)"></div><span class="val">32.1</span></div><div class="bar-line"><div class="bar prev" style="width:calc(33.2% * 2.2)"></div><span class="val muted">33.2</span></div></div></div>
+        <div class="row"><span class="lbl">강/산/호수</span><div class="track"><div class="bar-line"><div class="bar cur" style="width:calc(27.6% * 2.2)"></div><span class="val">27.6</span></div><div class="bar-line"><div class="bar prev" style="width:calc(38.5% * 2.2)"></div><span class="val muted">38.5</span></div></div></div>
+      </div>
+    </div>
+    <div class="chart">
+      <h3>다른 도시와 비교한 대구의 강점</h3>
+      <div class="key"><span><i style="background:var(--accent)"></i>먹거리 관련</span><span><i style="background:var(--ink)"></i>그 외</span></div>
+      <div class="bars">
+        <div class="row"><span class="lbl">자연 관광지</span><div class="track"><div class="bar-line"><div class="bar cur" style="width:calc(21.5% * 3.4)"></div><span class="val">21.5</span></div></div></div>
+        <div class="row hl"><span class="lbl">다양한 먹거리</span><div class="track"><div class="bar-line"><div class="bar cur" style="width:calc(19.1% * 3.4)"></div><span class="val">19.1</span></div></div></div>
+        <div class="row"><span class="lbl">랜드마크 관광지</span><div class="track"><div class="bar-line"><div class="bar cur" style="width:calc(13.9% * 3.4)"></div><span class="val">13.9</span></div></div></div>
+        <div class="row hl"><span class="lbl">특색있는 미식</span><div class="track"><div class="bar-line"><div class="bar cur" style="width:calc(11.3% * 3.4)"></div><span class="val">11.3</span></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 원문 화면 -->
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">원문 화면 증거</span>
+    <h2>보고서 원문 페이지</h2>
+    <p class="muted">대구시 공식 전자책 서버에 올라온 보고서 페이지를 그대로 옮겼습니다. 숫자는 원문 그대로이고, 쪽수는 PDF 기준입니다.</p>
+  </div>
+  <div class="shots">
+    <figure>
+      <img src="img/daegu-2025-domestic-p6.jpg" alt="2025 대구관광 실태조사(내국인) 주요결과 페이지. 항목별 만족도, 다른 도시 비교 시 대구의 강점과 아쉬운 점, 가장 좋았던 활동, 방문 관광지, 추천 음식 그래프" loading="lazy" width="1276" height="1789">
+      <figcaption>
+        <span class="tier A">A 원문 직접 확인</span>
+        <strong class="mono">2025년 대구관광 실태조사 보고서(내국인).pdf · PDF 6쪽</strong>
+        <ul>
+          <li>가장 좋았던 활동: <mark>맛집 체험 34.2%</mark>(1위)</li>
+          <li>대구의 강점: 다양한 먹거리 19.1%, 특색있는 미식 11.3%</li>
+          <li>아쉬운 점: 특색있는 미식 13.7%(1위), 다양한 먹거리 11.3%</li>
+          <li>추천 음식: 곱창/막창 9.2%(1위)</li>
+          <li>식당 및 음식 만족도 87.4%(2023년 83.0%)</li>
+        </ul>
+        <a href="https://ebook.daegu.go.kr/Viewer/ELPQP87DF7C2" target="_blank" rel="noopener">대구시 전자책에서 원문 보기 ↗</a>
+      </figcaption>
+    </figure>
+    <figure>
+      <img src="img/daegu-2024-foreign-p5.jpg" alt="2024 대구관광 실태조사(외국인) 주요결과 페이지. 전반적 만족도, 항목별 만족도, 좋았던 활동, 추천 관광지, 좋았던 음식 그래프" loading="lazy" width="1276" height="1789">
+      <figcaption>
+        <span class="tier A">A 원문 직접 확인</span>
+        <strong class="mono">2024년 대구관광 실태조사 보고서(외국인).pdf · PDF 5쪽</strong>
+        <ul>
+          <li>항목별 만족도: <mark>식당 및 음식 93.0%</mark>(1위, 2019년 84.8%)</li>
+          <li>추천 관광지: 서문시장(야시장) 38.8%(1위)</li>
+          <li>좋았던 음식: 불고기 18.0%, 비빔밥 14.9%, 김밥 10.3%, 찜갈비 9.3%</li>
+          <li>재방문 의향 87.8%, 추천 의향 90.8%</li>
+        </ul>
+        <a href="https://ebook.daegu.go.kr/Viewer/H1354K45C7OQ" target="_blank" rel="noopener">대구시 전자책에서 원문 보기 ↗</a>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 전체 근거표 -->
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">전체 근거표</span>
+    <h2>출처별 수치</h2>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>수치</th><th>내용</th><th>조사·자료명</th><th>등급</th><th>참고 사이트</th></tr></thead>
+      <tbody>
+        <tr><td class="n">34.2%</td><td>가장 좋았던 활동 1위 맛집 체험</td><td>2025 대구관광 실태조사(내국인), 대구광역시</td><td><span class="tier A">A</span></td><td><a href="https://ebook.daegu.go.kr/Viewer/ELPQP87DF7C2" target="_blank" rel="noopener">대구시 전자책</a> PDF 6쪽</td></tr>
+        <tr><td class="n">19.1%</td><td>대구의 강점: 다양한 먹거리(2위)</td><td>2025 대구관광 실태조사(내국인)</td><td><span class="tier A">A</span></td><td><a href="https://ebook.daegu.go.kr/Viewer/ELPQP87DF7C2" target="_blank" rel="noopener">대구시 전자책</a> PDF 6쪽</td></tr>
+        <tr><td class="n">13.7%</td><td>대구의 아쉬운 점 1위: 특색있는 미식</td><td>2025 대구관광 실태조사(내국인)</td><td><span class="tier A">A</span></td><td><a href="https://ebook.daegu.go.kr/Viewer/ELPQP87DF7C2" target="_blank" rel="noopener">대구시 전자책</a> PDF 6쪽</td></tr>
+        <tr><td class="n">9.2%</td><td>추천 음식 1위 곱창/막창</td><td>2025 대구관광 실태조사(내국인)</td><td><span class="tier A">A</span></td><td><a href="https://ebook.daegu.go.kr/Viewer/ELPQP87DF7C2" target="_blank" rel="noopener">대구시 전자책</a> PDF 6쪽</td></tr>
+        <tr><td class="n">96.9%</td><td>재방문 의향(2023년 89.7%)</td><td>2025 대구관광 실태조사(내국인)</td><td><span class="tier A">A</span></td><td><a href="https://ebook.daegu.go.kr/Viewer/ELPQP87DF7C2" target="_blank" rel="noopener">대구시 전자책</a> PDF 5쪽</td></tr>
+        <tr><td class="n">93.0%</td><td>외국인 만족도 1위: 식당 및 음식</td><td>2024 대구관광 실태조사(외국인), 대구광역시</td><td><span class="tier A">A</span></td><td><a href="https://ebook.daegu.go.kr/Viewer/H1354K45C7OQ" target="_blank" rel="noopener">대구시 전자책</a> PDF 5쪽</td></tr>
+        <tr><td class="n">38.8%</td><td>외국인 추천 관광지 1위: 서문시장(야시장)</td><td>2024 대구관광 실태조사(외국인)</td><td><span class="tier A">A</span></td><td><a href="https://ebook.daegu.go.kr/Viewer/H1354K45C7OQ" target="_blank" rel="noopener">대구시 전자책</a> PDF 5쪽</td></tr>
+        <tr><td class="n">61.7%</td><td>방한 결정 시 고려 활동 1위: 식도락</td><td>2025 외래관광객조사, 문체부·한국관광공사</td><td><span class="tier B">B</span></td><td><a href="https://m.ddaily.co.kr/page/view/2026100114150500860" target="_blank" rel="noopener">디지털데일리</a></td></tr>
+        <tr><td class="n">45.9%</td><td>외국인 지출 중 음식 관련 비중</td><td>2025 외래관광객조사</td><td><span class="tier B">B</span></td><td><a href="https://m.ddaily.co.kr/page/view/2026100114150500860" target="_blank" rel="noopener">디지털데일리</a></td></tr>
+        <tr><td class="n">65.6%</td><td>국내여행 음식관광 참여(증가 폭 1위, +3.9%p)</td><td>2025 국민여행조사, 문체부·한국문화관광연구원</td><td><span class="tier B">B</span></td><td><a href="https://www.segye.com/newsView/20260630515634" target="_blank" rel="noopener">세계일보</a></td></tr>
+        <tr><td class="n">20.7%</td><td>대구공항 입국 외국인 소비 2위: 일반외식업</td><td>문체부·한국관광공사 데이터(2026 상반기)</td><td><span class="tier B">B</span></td><td><a href="https://kbmaeil.com/article/20260928500551" target="_blank" rel="noopener">경북매일</a></td></tr>
+        <tr><td class="n">115만 명</td><td>2025 대구치맥페스티벌 방문객, 카드 매출 +17.9%</td><td>대구시 빅데이터 분석</td><td><span class="tier B">B</span></td><td><a href="https://www.ajunews.com/view/20251105145720704" target="_blank" rel="noopener">아주경제</a></td></tr>
+        <tr><td class="n">45%</td><td>일본인 방한 결정 요인 1위: 현지의 맛있는 한국 음식</td><td>2024 잠재방한여행객 조사, 한국관광공사</td><td><span class="tier B">B</span></td><td><a href="https://www.heraldk.com/article/2025101916052328621" target="_blank" rel="noopener">헤럴드경제</a></td></tr>
+        <tr><td class="n">57.6%</td><td>외국인이 대구에서 하고 싶은 활동 1위: 식도락</td><td>대구시 해외시장 대구관광 인식조사(2021 발표)</td><td><span class="tier C">C</span></td><td><a href="https://kbmaeil.com/article/202107040310694" target="_blank" rel="noopener">경북매일</a></td></tr>
+        <tr><td class="n">24.3%</td><td>내국인이 가장 기억하는 대구 음식 1위: 막창</td><td>2017 대구관광 실태조사</td><td><span class="tier C">C</span></td><td><a href="https://www.kyongbuk.co.kr/news/articleView.html?idxno=1026400" target="_blank" rel="noopener">경북일보</a></td></tr>
+        <tr><td class="n">86곳</td><td>대구10미데이 참여 음식점(2025년 46곳의 약 2배)</td><td>대구시 위생정책과 발표(2026)</td><td><span class="tier B">B</span></td><td><a href="https://www.wikitree.co.kr/articles/1157614" target="_blank" rel="noopener">위키트리</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 반대 근거 -->
+<section>
+  <div class="warn">
+    <span class="eyebrow">발표 전에 꼭 알아둘 점</span>
+    <h2>이렇게 말하면 반박당합니다</h2>
+    <ul>
+      <li><strong>"관광객 대부분이 10미를 먹으러 대구에 온다"는 근거가 없습니다.</strong> 대구경북연구원이 2019년 자료를 분석했을 때, 대구를 고른 이유가 음식인 경우는 8.9%였고 맛집 탐방이 주목적인 경우는 1.0%였습니다(<a href="https://www.kyongbuk.co.kr/news/articleView.html?idxno=2094300" target="_blank" rel="noopener">경북일보 2022.02.15</a>, 「대구 음식관광 활성화 방안」). 2025년 조사에서도 관광지 방문 이유 1위는 가족·지인 추천(대구 전체 45.4%)입니다(<a href="https://ebook.daegu.go.kr/Viewer/ELPQP87DF7C2" target="_blank" rel="noopener">2025 실태조사</a> PDF 7쪽).</li>
+      <li><strong>안전한 주장은 "와서 가장 좋았던 것이 음식이다"입니다.</strong> 맛집 체험 34.2%(1위, <a href="https://ebook.daegu.go.kr/Viewer/ELPQP87DF7C2" target="_blank" rel="noopener">2025 내국인편</a>)와 외국인 음식 만족도 93.0%(1위, <a href="https://ebook.daegu.go.kr/Viewer/H1354K45C7OQ" target="_blank" rel="noopener">2024 외국인편</a>)가 그 근거입니다. 아쉬운 점 1위가 '특색있는 미식'(13.7%)이라는 점은 10미를 알려야 할 이유로 쓰세요.</li>
+      <li><strong>추천 음식 1위 곱창/막창은 9.2%입니다.</strong> 2023년 11.5%보다 낮아졌습니다(<a href="https://ebook.daegu.go.kr/Viewer/ELPQP87DF7C2" target="_blank" rel="noopener">2025 실태조사</a> PDF 6쪽). "막창이 압도적"이라고 말하지 마세요.</li>
+      <li><strong>B·C등급 숫자는 언론 기사로 확인한 것입니다.</strong> 61.7%와 65.6%는 아래 공식 게시판의 보고서 원문으로 한 번 더 확인한 뒤 쓰세요.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 파일 목록 -->
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">원문 파일 목록</span>
+    <h2>어디서 받을 수 있나</h2>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>파일명</th><th>발행</th><th>크기</th><th>공식 위치</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">2025년 대구관광 실태조사 보고서(내국인).pdf</td><td>대구광역시</td><td class="mono num">103.49 MB</td><td><a href="https://ebook.daegu.go.kr/Viewer/ELPQP87DF7C2" target="_blank" rel="noopener">대구시 전자책</a></td></tr>
+        <tr><td class="mono">2024년 대구관광 실태조사 보고서(외국인).pdf</td><td>대구광역시</td><td class="mono num">21.58 MB</td><td><a href="https://ebook.daegu.go.kr/Viewer/H1354K45C7OQ" target="_blank" rel="noopener">대구시 전자책</a></td></tr>
+        <tr><td class="mono">2023 대구관광실태조사.pdf</td><td>대구광역시</td><td class="mono num">37.66 MB</td><td><a href="https://ebook.daegu.go.kr/Viewer/LO3S8VAO8INH" target="_blank" rel="noopener">대구시 전자책</a></td></tr>
+        <tr><td>연도별 대구관광실태조사 모음(2018~2025)</td><td>대구광역시 대구통계</td><td class="muted">-</td><td><a href="https://stat.daegu.go.kr/statsPublication/policyPart/dgTourResearch.do" target="_blank" rel="noopener">stat.daegu.go.kr</a></td></tr>
+        <tr><td>2025년 외래관광객조사 최종 보고서 (2026.05.26 게시)</td><td>문화체육관광부·한국관광공사</td><td class="muted">PDF</td><td><a href="https://know.tour.go.kr/stat/fReportsOfForeignerDis19Re.do" target="_blank" rel="noopener">관광지식정보시스템</a></td></tr>
+        <tr><td>[0630]문체부보도자료-2025년 국민여행조사 결과 발표</td><td>문화체육관광부 관광정책과</td><td class="mono num">PDF 937 KB</td><td><a href="https://www.mcst.go.kr/site/s_notice/press/pressView.jsp?pSeq=22557" target="_blank" rel="noopener">문체부 보도자료</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted" style="font-size:14px">대구시 전자책 화면 위쪽의 다운로드 버튼을 누르면 위 파일명 그대로 PDF를 받을 수 있습니다.</p>
+</section>
+
+<!-- 인용 형식 -->
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">인용 형식</span>
+    <h2>보고서가 정한 인용 문구</h2>
+    <p class="muted">보고서 「일러두기」 10번 항목(PDF 3쪽)은 전재하거나 역재할 때 아래처럼 적으라고 정하고 있습니다.</p>
+  </div>
+  <div class="cite-box">
+    <code id="citeText">「2025년 대구광역시 관광실태조사」 보고서 6쪽에서 전재</code>
+    <button type="button" id="copyBtn">문구 복사</button>
+  </div>
+</section>
+
+<!-- 참고 사이트 전체 -->
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">참고 사이트 전체 목록</span>
+    <h2>이 페이지가 참고한 사이트</h2>
+    <p class="muted">이 페이지의 모든 숫자는 아래 사이트 중 하나에서 나왔습니다.</p>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>구분</th><th>사이트·기사</th><th>날짜</th><th>쓰인 내용</th></tr></thead>
+      <tbody>
+        <tr><td>공식 원문</td><td><a href="https://ebook.daegu.go.kr/Viewer/ELPQP87DF7C2" target="_blank" rel="noopener">대구시 전자책: 2025년 대구관광 실태조사 보고서(내국인)</a></td><td class="mono">2025</td><td>맛집 체험 34.2%, 강점·아쉬운 점, 추천 음식, 재방문 의향</td></tr>
+        <tr><td>공식 원문</td><td><a href="https://ebook.daegu.go.kr/Viewer/H1354K45C7OQ" target="_blank" rel="noopener">대구시 전자책: 2024년 대구관광 실태조사 보고서(외국인)</a></td><td class="mono">2024</td><td>식당 및 음식 만족도 93.0%, 서문시장 38.8%, 좋았던 음식</td></tr>
+        <tr><td>공식 원문</td><td><a href="https://ebook.daegu.go.kr/Viewer/LO3S8VAO8INH" target="_blank" rel="noopener">대구시 전자책: 2023 대구관광실태조사</a></td><td class="mono">2023</td><td>2023년 비교 수치</td></tr>
+        <tr><td>공식 목록</td><td><a href="https://stat.daegu.go.kr/statsPublication/policyPart/dgTourResearch.do" target="_blank" rel="noopener">대구통계: 대구관광실태조사 연도별 모음</a></td><td class="mono">2018~2025</td><td>보고서 위치</td></tr>
+        <tr><td>공식 목록</td><td><a href="https://know.tour.go.kr/stat/fReportsOfForeignerDis19Re.do" target="_blank" rel="noopener">관광지식정보시스템: 외래관광객조사 보고서 목록</a></td><td class="mono">2026.05.26</td><td>2025 외래관광객조사 최종 보고서 위치</td></tr>
+        <tr><td>공식 발표</td><td><a href="https://www.mcst.go.kr/site/s_notice/press/pressView.jsp?pSeq=22557" target="_blank" rel="noopener">문화체육관광부 보도자료: 2025년 국민여행조사 결과 발표</a></td><td class="mono">2026.06.30</td><td>국민여행조사 원문 위치</td></tr>
+        <tr><td>언론</td><td><a href="https://m.ddaily.co.kr/page/view/2026100114150500860" target="_blank" rel="noopener">디지털데일리</a></td><td class="mono">2026.10.01</td><td>식도락 61.7%, 참여 81.6%, 음식 지출 45.9%</td></tr>
+        <tr><td>언론</td><td><a href="https://www.segye.com/newsView/20260630515634" target="_blank" rel="noopener">세계일보</a></td><td class="mono">2026.06.30</td><td>국내여행 음식관광 65.6%</td></tr>
+        <tr><td>언론</td><td><a href="https://kbmaeil.com/article/20260928500551" target="_blank" rel="noopener">경북매일</a></td><td class="mono">2026.09.28</td><td>대구공항 입국 외국인 외식업 소비 20.7%</td></tr>
+        <tr><td>언론</td><td><a href="https://www.ajunews.com/view/20251105145720704" target="_blank" rel="noopener">아주경제</a></td><td class="mono">2025.11.05</td><td>치맥페스티벌 115만 명, 카드 매출 +17.9%</td></tr>
+        <tr><td>언론</td><td><a href="https://www.heraldk.com/article/2025101916052328621" target="_blank" rel="noopener">헤럴드경제</a></td><td class="mono">2025.10.19</td><td>일본인 방한 결정 요인 1위 음식 45%</td></tr>
+        <tr><td>언론</td><td><a href="https://kbmaeil.com/article/202107040310694" target="_blank" rel="noopener">경북매일</a></td><td class="mono">2021.07.04</td><td>외국인이 대구에서 하고 싶은 활동 식도락 57.6%</td></tr>
+        <tr><td>언론</td><td><a href="https://www.kyongbuk.co.kr/news/articleView.html?idxno=1026400" target="_blank" rel="noopener">경북일보</a></td><td class="mono">2018.05.15</td><td>2017 실태조사, 기억에 남는 음식 막창 24.3%</td></tr>
+        <tr><td>언론</td><td><a href="https://www.kyongbuk.co.kr/news/articleView.html?idxno=2094300" target="_blank" rel="noopener">경북일보</a></td><td class="mono">2022.02.15</td><td>대구 선택 이유 중 음식 8.9% (대구경북연구원)</td></tr>
+        <tr><td>언론</td><td><a href="https://www.wikitree.co.kr/articles/1157614" target="_blank" rel="noopener">위키트리</a></td><td class="mono">2026.09.06</td><td>대구 10미 목록·유래, 10미데이 참여 86곳</td></tr>
+        <tr><td>언론</td><td><a href="https://www.hankyung.com/article/202505092401h" target="_blank" rel="noopener">한국경제</a></td><td class="mono">2025.05</td><td>대구 10미 선정 기준(2006년)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  2026년 10월 28일 정리. 대구 10미(2006년 대구시 선정): 따로국밥, 막창구이, 뭉티기, 동인동찜갈비, 논메기매운탕, 복어불고기, 누른국수, 무침회, 야끼우동, 납작만두. 참고 사이트: <a href="https://www.wikitree.co.kr/articles/1157614" target="_blank" rel="noopener">위키트리 2026.09.06</a>, <a href="https://www.hankyung.com/article/202505092401h" target="_blank" rel="noopener">한국경제 2025.05</a>
+</footer>
+
+</div>
+
+<script>
+document.getElementById('copyBtn').addEventListener('click', function(){
+  var btn = this, txt = document.getElementById('citeText');
+  function done(){ btn.textContent = '복사됨'; setTimeout(function(){ btn.textContent = '문구 복사'; }, 1600); }
+  function fallback(){ var r = document.createRange(); r.selectNodeContents(txt); var s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = '선택됨, Ctrl+C로 복사'; }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt.textContent).then(done, fallback);
+  } else { fallback(); }
+});
+</script>
